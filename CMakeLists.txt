@@ -12,9 +12,14 @@ add_executable(mixery
 )
 
 
-
-# pull in common dependencies
-target_link_libraries(mixery pico_stdlib)
+pico_enable_stdio_usb(mixery 1)
+target_sources(mixery PRIVATE lib/cJSON/cJSON.c)
+target_include_directories(mixery PRIVATE lib/cJSON)
+target_link_libraries(mixery 
+  pico_stdlib 
+  tinyusb_board
+  tinyusb_device
+)
 pico_enable_stdio_usb(mixery 1)
 
 

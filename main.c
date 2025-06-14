@@ -1,31 +1,38 @@
-#include "pico/stdlib.h"
+#include "cJSON.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#include "bsp/board_api.h"
+#include "tusb.h"
+int main(void) {
 
-// Initialize the GPIO for the LED
-void pico_led_init(void) {
-#ifdef PICO_DEFAULT_LED_PIN
-    // A device like Pico that uses a GPIO for the LED will define PICO_DEFAULT_LED_PIN
-    // so we can use normal GPIO functionality to turn the led on and off
-    gpio_init(PICO_DEFAULT_LED_PIN);
-    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
-#endif
+  tusb_rhport_init_t dev_init = {.role = TUSB_ROLE_DEVICE,
+                                 .speed = TUSB_SPEED_AUTO};
+  tusb_init(0, &dev_init); // initialize device stack on roothub port 0
+
+  tusb_rhport_init_t host_init = {.role = TUSB_ROLE_HOST,
+                                  .speed = TUSB_SPEED_AUTO};
+  tusb_init(1, &host_init); // initialize host stack on roothub port 1
+
+  while (1) {
+    tud_task();
+  }
+}
+void send_json(void) {
+  cJSON *root = cJSON_CreateObject();
+  cJSON_AddStringToObject(root, "status", "ok");
+  char *json_str = cJSON_PrintUnformatted(root);
+
+  if (tud_cdc_connected()) {
+    tud_cdc_write(json_str, strlen(json_str));
+    tud_cdc_write_flush();
+  }
+
+  cJSON_Delete(root);
+  free(json_str);
 }
 
-// Turn the LED on or off
-void pico_set_led(bool led_on) {
-#if defined(PICO_DEFAULT_LED_PIN)
-    // Just set the GPIO on or off
-    gpio_put(PICO_DEFAULT_LED_PIN, led_on);
-#endif
-}
+void USB0_IRQHandler(void) { tusb_int_handler(0, true); }
 
-int main() {
-    stdio_init_all();
-    pico_led_init();
-    while (true) {
-        pico_set_led(true);
-        sleep_ms(100);
-        pico_set_led(false);
-        sleep_ms(100);
-    }
-}
+void USB1_IRQHandler(void) { tusb_int_handler(1, true); }
