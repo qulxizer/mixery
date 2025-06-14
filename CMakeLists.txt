@@ -8,18 +8,21 @@ project(mixery)
 pico_sdk_init()
 
 add_executable(mixery
-        main.c
 )
 
 
 pico_enable_stdio_usb(mixery 1)
-target_sources(mixery PRIVATE lib/cJSON/cJSON.c)
+
+
+target_sources(mixery PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}/main.c
+        ${CMAKE_CURRENT_LIST_DIR}/usb_descriptors.c)
+
 target_include_directories(mixery PRIVATE lib/cJSON)
 target_link_libraries(mixery 
-  pico_stdlib 
-  tinyusb_board
-  tinyusb_device
-)
+PUBLIC pico_stdlib pico_unique_id tinyusb_device tinyusb_board)
+target_include_directories(mixery PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR})
 pico_enable_stdio_usb(mixery 1)
 
 

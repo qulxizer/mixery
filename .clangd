@@ -2,7 +2,6 @@ CompileFlags:
   Add: [
     -I./lib/cJSON
     -I/usr/arm-none-eabi/include
-    -I./tinyusb/src
   ]
   CompilationDatabase: build
 
