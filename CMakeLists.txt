@@ -18,9 +18,7 @@ target_include_directories(mixery PUBLIC
 
 # Link libraries
 target_link_libraries(mixery PUBLIC pico_stdlib pico_unique_id tinyusb_device tinyusb_board)
-
-# Enable USB stdio
-pico_enable_stdio_usb(mixery 1)
+target_compile_options(mixery INTERFACE -DPICO_ENTER_USB_BOOT_ON_EXIT=1)
 
 # Generate bin/hex/uf2
 pico_add_extra_outputs(mixery)

@@ -24,14 +24,18 @@
 
 #ifndef USB_DESCRIPTORS_H_
 #define USB_DESCRIPTORS_H_
+// Input Reports
 
-enum
-{
-  REPORT_ID_KEYBOARD = 1,
-  REPORT_ID_MOUSE,
-  REPORT_ID_CONSUMER_CONTROL,
-  REPORT_ID_GAMEPAD,
-  REPORT_ID_COUNT
-};
+#define REPORT_ID_INPUT_BUTTON   1
+#define REPORT_ID_INPUT_ENCODER  2
+
+// Feature Reports - GET
+#define GET_REPORT_ID_GET_SLOT   5
+
+// Feature Reports - SET
+#define SET_REPORT_ID_BLINK          6
+#define SET_REPORT_ID_CREATE_LAYOUT  7
+#define SET_REPORT_ID_SET_SLOT       8
+#define SET_REPORT_ID_RESET_TO_BOOT  9
 
 #endif /* USB_DESCRIPTORS_H_ */
