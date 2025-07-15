@@ -16,13 +16,14 @@ typedef enum {
 typedef struct __attribute__((packed)) {
     uint8_t pin;
     uint8_t id;
-    bool pressed;
+    uint8_t pressed;
 } Button;
 STATIC_ASSERT_STRUCT_SIZE(Button, CFG_TUD_HID_EP_BUFSIZE);
 
 typedef struct __attribute__((packed)) {
     uint8_t pinA;
     uint8_t pinB;
+    uint8_t last_b_position;
     uint8_t id;
     uint8_t presentage;
 } Encoder;
@@ -60,5 +61,8 @@ void free_layout(Layout * layout);
 void set_slot(Layout* layout, DeviceSlot slot);
 DeviceSlot* get_slot(Layout* layout, uint8_t row, uint8_t col);
 DeviceSlot *lookup_button(Layout *layout, uint pin);
+DeviceSlot *lookup_encoder(Layout *layout, uint pinA);
+
+
 #endif
 

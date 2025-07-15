@@ -103,6 +103,15 @@ uint8_t const desc_hid_report[] = {
     0x95, sizeof(DeviceSlot),     // Report Count (match your struct)
     0x81, 0x02,                   // Input (Data,Var,Abs)
 
+    // Input report for DEVICE_ENCODER
+    0x85, REPORT_ID_INPUT_ENCODER, // Report ID
+    0x09, 0x06,                    // Usage (Vendor-defined)
+    0x15, 0x00,                    // Logical Min
+    0x26, 0xFF, 0x00,              // Logical Max
+    0x75, 0x08,                    // Report Size (8 bits)
+    0x95, sizeof(DeviceSlot),      // Report Count (match your struct)
+    0x81, 0x02,                    // Input (Data,Var,Abs)
+
     // Feature Report: GET_SLOT (report ID 1)
     0x85, GET_REPORT_ID_GET_SLOT, // Report ID 1
     0x09, 0x01,                   //   Usage (Vendor Defined)

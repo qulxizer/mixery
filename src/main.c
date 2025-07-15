@@ -35,7 +35,7 @@ void hid_task(Layout *layout) {
         continue;
       }
 
-      switch (slot->type)
+      switch (slot->type) {
       case DEVICE_BUTTON: {
         if (!slot->changed) {
           continue;
@@ -44,6 +44,16 @@ void hid_task(Layout *layout) {
           tud_hid_report(REPORT_ID_INPUT_BUTTON, slot, sizeof(DeviceSlot));
           slot->changed = false;
         }
+      }
+      case DEVICE_ENCODER: {
+        if (!slot->changed) {
+          continue;
+        }
+        if (true) {
+          tud_hid_report(REPORT_ID_INPUT_ENCODER, slot, sizeof(DeviceSlot));
+          slot->changed = false;
+        }
+      }
       }
     }
   }

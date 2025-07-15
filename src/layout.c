@@ -1,5 +1,4 @@
 #include "layout.h"
-#include "bsp/board_api.h"
 #include "utils.h"
 #include <stddef.h>
 #include <stdint.h>
@@ -72,7 +71,7 @@ DeviceSlot *lookup_button(Layout *layout, uint pin) {
   return NULL;
 }
 
-DeviceSlot *lookup_encoder(Layout *layout, uint pinA, uint pinB) {
+DeviceSlot *lookup_encoder(Layout *layout, uint pinA) {
   if (!layout) {
     return NULL;
   }
@@ -82,8 +81,7 @@ DeviceSlot *lookup_encoder(Layout *layout, uint pinA, uint pinB) {
       if (!slot) {
         continue;
       }
-      if (slot->type == DEVICE_ENCODER && slot->encoder.pinA == pinA &&
-          slot->encoder.pinB == pinB) {
+      if (slot->type == DEVICE_ENCODER && slot->encoder.pinA == pinA) {
         return slot;
       }
     }

@@ -52,8 +52,6 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id,
     }
     const DeviceSlot *slot = get_slot(layout, 3, 4);
     if (!slot) {
-      blink(100);
-      blink(100);
       return 0;
     }
     memcpy(buffer, slot, sizeof(DeviceSlot));
@@ -85,18 +83,14 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
     if (!layout) {
       return;
     }
-    blink(100);
     return;
   }
   case SET_REPORT_ID_SET_SLOT: {
     const DeviceSlot *report = (const DeviceSlot *)buffer;
     void *ptr = malloc(64);
-    sprintf(ptr, "buf:%i, dev:%i", bufsize, sizeof(DeviceSlot));
-    tud_hid_report(0, ptr, 64);
 
     switch (report->type) {
     case DEVICE_BUTTON: {
-      blink(100);
       set_slot(layout, *report);
       gpio_init(report->button.pin);
       gpio_pull_up(report->button.pin);
@@ -104,6 +98,18 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
       gpio_set_irq_enabled_with_callback(
           report->button.pin, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,
           button_irq_handler);
+    case DEVICE_ENCODER: {
+      set_slot(layout, *report);
+      gpio_init(report->encoder.pinA);
+      gpio_init(report->encoder.pinB);
+      gpio_pull_up(report->encoder.pinA);
+      gpio_pull_up(report->encoder.pinB);
+      gpio_set_dir(report->encoder.pinA, GPIO_IN);
+      gpio_set_dir(report->encoder.pinB, GPIO_IN);
+      gpio_set_irq_enabled_with_callback(
+          report->encoder.pinA, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,
+          encoder_irq_handler);
+    }
     }
     }
     break;
