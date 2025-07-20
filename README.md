@@ -13,13 +13,14 @@ Supports hot-plugging buttons and rotary encoders—no reboot needed.
 ## Requirements
 
 - Raspberry Pi Pico  
-- Pico SDK with TinyUSB enabled  
+- Pico SDK with TinyUSB enabled  [//] Already done
 - CMake + ARM GCC toolchain
 
 ## Build
 
 ```bash
 git clone https://github.com/qulxizer/mixery
+git submodule update
 cd mixery
 mkdir build && cd build
 cmake ..
