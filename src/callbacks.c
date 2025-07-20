@@ -45,9 +45,10 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id,
   (void)buffer;
   (void)reqlen;
   switch (report_id) {
+
+  // This is just a test not ment for real usage
   case GET_REPORT_ID_GET_SLOT: {
     if (!layout) {
-      blink(100);
       return 0;
     }
     const DeviceSlot *slot = get_slot(layout, 3, 4);
