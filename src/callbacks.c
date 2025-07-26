@@ -1,3 +1,4 @@
+#include "bsp/board_api.h"
 #include "class/hid/hid_device.h"
 #include "layout.h"
 #include "report.h"
@@ -99,6 +100,8 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
       gpio_set_irq_enabled_with_callback(
           report->button.pin, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,
           button_irq_handler);
+      break;
+
     case DEVICE_ENCODER: {
       set_slot(layout, *report);
       gpio_init(report->encoder.pinA);
@@ -110,6 +113,7 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
       gpio_set_irq_enabled_with_callback(
           report->encoder.pinA, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true,
           encoder_irq_handler);
+      break;
     }
     }
     }
