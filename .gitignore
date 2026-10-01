@@ -1,3 +1,5 @@
 build/
 .cache/
+venv/
+*.zip
 compiled_commands.json

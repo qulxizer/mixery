@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.13)
 
 
 # Setup SDK
+set(PICO_TINYUSB_PATH "${CMAKE_CURRENT_LIST_DIR}/lib/pico-sdk/lib/tinyusb")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include("pico_sdk_import.cmake")
 project(mixery)
 pico_sdk_init()

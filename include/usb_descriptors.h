@@ -24,18 +24,30 @@
 
 #ifndef USB_DESCRIPTORS_H_
 #define USB_DESCRIPTORS_H_
-// Input Reports
 
-#define REPORT_ID_INPUT_BUTTON   1
-#define REPORT_ID_INPUT_ENCODER  2
+typedef enum {
+  REPORT_BUTTON = 1,
+  REPORT_ENCODER = 2,
+
+  REPORT_SLOT_READ = 5,
+
+  REPORT_BLINK = 6,
+  REPORT_LAYOUT_CREATE = 7,
+  REPORT_SLOT_WRITE = 8,
+  REPORT_BOOT_RESET = 9,
+} report_id_t;
+
+// Input Reports
+#define REPORT_ID_INPUT_BUTTON 1
+#define REPORT_ID_INPUT_ENCODER 2
 
 // Feature Reports - GET
-#define GET_REPORT_ID_GET_SLOT   5
+#define GET_REPORT_ID_GET_SLOT 5
 
 // Feature Reports - SET
-#define SET_REPORT_ID_BLINK          6
-#define SET_REPORT_ID_CREATE_LAYOUT  7
-#define SET_REPORT_ID_SET_SLOT       8
-#define SET_REPORT_ID_RESET_TO_BOOT  9
+#define SET_REPORT_ID_BLINK 6
+#define SET_REPORT_ID_CREATE_LAYOUT 7
+#define SET_REPORT_ID_SET_SLOT 8
+#define SET_REPORT_ID_RESET_TO_BOOT 9
 
 #endif /* USB_DESCRIPTORS_H_ */

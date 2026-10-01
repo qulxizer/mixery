@@ -14,4 +14,3 @@ typedef struct {
 } DeviceSlotReport;
 
 #endif
-

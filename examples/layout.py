@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import hid
 
 VENDOR_ID = 0xCAFE

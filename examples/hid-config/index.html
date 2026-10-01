@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HID Configurator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>HID Configurator</h1>
+      <section class="connection">
+        <button id="connect">Connect</button>
+        <span id="status">Disconnected</span>
+      </section>
+      <section>
+        <h2>Layout</h2>
+        <div class="layout-controls">
+          <label>
+            Rows <input id="rows" type="number" min="1" max="16" value="3" />
+          </label>
+          <label>
+            Columns <input id="cols" type="number" min="1" max="16" value="4" />
+          </label>
+          <button id="set-layout">Create Layout</button>
+        </div>
+        <div id="grid"></div>
+      </section>
+      <section id="slot-editor" hidden>
+        <h2>Button</h2>
+        <p>
+          Row: <span id="slot-row"></span> Column: <span id="slot-col"></span>
+        </p>
+        <label>
+          Button pin <input id="button-pin" type="number" min="0" max="255" />
+        </label>
+        <label>
+          Button ID <input id="button-id" type="number" min="0" max="255" />
+        </label>
+        <label> Action <input id="action" type="text" maxlength="16" /> </label>
+        <label>
+          Device type
+          <input id="device-type" type="number" min="0" max="255" value="1" />
+        </label>
+        <button id="set-slot">Set Button</button>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
