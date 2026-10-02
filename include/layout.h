@@ -28,12 +28,27 @@ typedef struct __attribute__((packed)) {
 } Encoder;
 STATIC_ASSERT_STRUCT_SIZE(Encoder, CFG_TUD_HID_EP_BUFSIZE);
 
+typedef enum {
+  ACTION_NONE = 0,
+  ACTION_KEY = 1,
+  ACTION_TEXT = 2,
+  ACTION_LAUNCH = 3,
+  ACTION_MACRO = 4,
+} ActionType;
+
+typedef struct __attribute__((packed)) {
+  uint8_t type;
+  uint8_t flags;
+  uint8_t id;
+  uint8_t data[13];
+} Action;
+
 typedef struct __attribute__((packed)) {
   uint8_t row;
   uint8_t col;
   uint8_t changed;
   uint8_t type;
-  char action[16];
+  Action action;
   union {
     Button button;
     Encoder encoder;

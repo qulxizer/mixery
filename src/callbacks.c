@@ -89,7 +89,6 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
   }
   case SET_REPORT_ID_SET_SLOT: {
     const DeviceSlot *report = (const DeviceSlot *)buffer;
-    void *ptr = malloc(64);
 
     switch (report->type) {
     case DEVICE_BUTTON: {

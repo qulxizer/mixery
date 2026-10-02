@@ -6,45 +6,168 @@
     <title>HID Configurator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <main>
       <h1>HID Configurator</h1>
+
       <section class="connection">
         <button id="connect">Connect</button>
         <span id="status">Disconnected</span>
       </section>
+
       <section>
         <h2>Layout</h2>
+
         <div class="layout-controls">
           <label>
-            Rows <input id="rows" type="number" min="1" max="16" value="3" />
+            Rows
+            <input id="rows" type="number" min="1" max="16" value="3" />
           </label>
+
           <label>
-            Columns <input id="cols" type="number" min="1" max="16" value="4" />
+            Columns
+            <input id="cols" type="number" min="1" max="16" value="4" />
           </label>
+
           <button id="set-layout">Create Layout</button>
         </div>
+
         <div id="grid"></div>
       </section>
+
       <section id="slot-editor" hidden>
-        <h2>Button</h2>
+        <h2>Slot</h2>
+
         <p>
           Row: <span id="slot-row"></span> Column: <span id="slot-col"></span>
         </p>
-        <label>
-          Button pin <input id="button-pin" type="number" min="0" max="255" />
-        </label>
-        <label>
-          Button ID <input id="button-id" type="number" min="0" max="255" />
-        </label>
-        <label> Action <input id="action" type="text" maxlength="16" /> </label>
+
         <label>
           Device type
-          <input id="device-type" type="number" min="0" max="255" value="1" />
+          <select id="device-type">
+            <option value="0">None</option>
+            <option value="1">Button</option>
+            <option value="2">Encoder</option>
+          </select>
         </label>
-        <button id="set-slot">Set Button</button>
+
+        <div id="button-editor">
+          <h3>Button</h3>
+
+          <label>
+            Pin
+            <input id="button-pin" type="number" min="0" max="255" value="0" />
+          </label>
+
+          <label>
+            Button ID
+            <input id="button-id" type="number" min="0" max="255" value="0" />
+          </label>
+        </div>
+
+        <div id="encoder-editor" hidden>
+          <h3>Encoder</h3>
+
+          <label>
+            Pin A
+            <input
+              id="encoder-pin-a"
+              type="number"
+              min="0"
+              max="255"
+              value="0"
+            />
+          </label>
+
+          <label>
+            Pin B
+            <input
+              id="encoder-pin-b"
+              type="number"
+              min="0"
+              max="255"
+              value="0"
+            />
+          </label>
+
+          <label>
+            Initial position
+            <input
+              id="encoder-position"
+              type="number"
+              min="0"
+              max="255"
+              value="0"
+            />
+          </label>
+
+          <label>
+            Encoder ID
+            <input id="encoder-id" type="number" min="0" max="255" value="0" />
+          </label>
+        </div>
+
+        <h3>Action</h3>
+
+        <label>
+          Action type
+          <select id="action-type">
+            <option value="0">None</option>
+            <option value="1">Key</option>
+            <option value="2">Text</option>
+            <option value="3">Launch</option>
+            <option value="4">Macro</option>
+          </select>
+        </label>
+
+        <div id="action-key" hidden>
+          <label>
+            Modifiers
+            <input
+              id="key-modifiers"
+              type="number"
+              min="0"
+              max="255"
+              value="0"
+            />
+          </label>
+
+          <label>
+            Key
+            <input id="key-code" type="number" min="0" max="255" value="4" />
+          </label>
+        </div>
+
+        <div id="action-text" hidden>
+          <label>
+            Text
+            <input id="text-value" type="text" maxlength="13" />
+          </label>
+        </div>
+
+        <div id="action-launch" hidden>
+          <label>
+            Application
+            <select id="launch-app">
+              <option value="1">Ghostty</option>
+              <option value="2">Firefox</option>
+              <option value="3">Thunar</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="action-macro" hidden>
+          <label>
+            Macro ID
+            <input id="macro-id" type="number" min="0" max="255" value="0" />
+          </label>
+        </div>
+
+        <button id="set-slot">Set Slot</button>
       </section>
     </main>
+
     <script type="module" src="app.js"></script>
   </body>
 </html>
